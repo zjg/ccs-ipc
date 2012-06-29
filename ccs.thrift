@@ -9,16 +9,12 @@ struct CodeCompletionRequest {
    3: required i32 column;
 }
 
-// todo - handle Optional chunks somehow (can't do recursive structs in thrift)
-
 enum CodeCompletionChunkKind {
 
-   /* note - TypedText is not in this enum since it is a required field
-    * of the candidate
-    */
-   //TypedText,
-   
+   // todo - handle Optional chunks somehow (can't do recursive structs in thrift)
+
    /* these kinds have an associated text string */
+   TypedText,
    Text,
    Placeholder,
    Informative,
@@ -50,10 +46,11 @@ struct CodeCompletionChunk {
 // todo - annotations ?
 
 struct CodeCompletionCandidate {
-   1: required string typedText;
+   // all candidates should have a TypedText chunk
+   1: required list<CodeCompletionChunk> chunks;
+   
    2: optional i32 priority;
    3: optional string parentContext;
-   4: optional list<CodeCompletionChunk> chunks;
 }
 
 struct CodeCompletionResponse {
