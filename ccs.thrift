@@ -59,9 +59,7 @@ struct CodeCompletionResponse {
 }
 
 service CCS {
-
-   void ping();
+   string getVersionInfo();
    
    CodeCompletionResponse codeCompletion(1:CodeCompletionRequest request);
-
 }
